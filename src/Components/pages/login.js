@@ -11,11 +11,11 @@ import Alert from "react-bootstrap/Alert";
 export const Login = () => {
     const [validated, setValidated] = useState(false);
     const [failedLogin, setFailedLogin] = useState(false);
-    const [email, setEmail] = useState("");
+    const [username, setUsername] = useState("");
     const [password, setPassword] = useState("");
 
-    const onEmailChange = (event) => {
-        setEmail(event.target.value)
+    const onUsernameChange = (event) => {
+        setUsername(event.target.value)
     }
 
     const onPasswordChange = (event) => {
@@ -34,8 +34,8 @@ export const Login = () => {
         <Col xs="10" lg="6">
             <Form noValidate validated={validated} onSubmit={handleSubmit}>
                 <Form.Group className="mb-3" controlId="formBasicEmail">
-                <Form.Label>Email address</Form.Label>
-                <Form.Control required type="email" placeholder="student@email.com" value={email} onChange={onEmailChange}/>
+                <Form.Label>Username</Form.Label>
+                <Form.Control required type="text" value={username} onChange={onUsernameChange}/>
                 </Form.Group>
                 <Form.Group className="mb-3" controlId="formBasicPassword">
                 <Form.Label>Password</Form.Label>
