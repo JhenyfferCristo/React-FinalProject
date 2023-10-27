@@ -1,10 +1,12 @@
-import {useState} from "react";
+import {useContext, useState} from "react";
+import {useNavigate} from 'react-router-dom';
 import Button from "react-bootstrap/Button";
 import Form from "react-bootstrap/Form";
 import Container from "react-bootstrap/Container";
 import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
 import Alert from "react-bootstrap/Alert";
+import { useUserContext } from "../context/UserProvider";
 
 
 
@@ -13,6 +15,9 @@ export const Login = () => {
     const [failedLogin, setFailedLogin] = useState(false);
     const [username, setUsername] = useState("");
     const [password, setPassword] = useState("");
+    const navigate = useNavigate();
+
+    const {setUser} = useUserContext();
 
     const onUsernameChange = (event) => {
         setUsername(event.target.value)
@@ -23,8 +28,16 @@ export const Login = () => {
     }
     
     const handleSubmit = (event) => {
-        event.preventDefault();
-        event.stopPropagation();
+      event.preventDefault();
+      event.stopPropagation();
+      const form = event.currentTarget;
+      if (form.checkValidity() === true) {
+          //call BE api to login
+          //if(success)
+          setUser({
+            username
+          })
+      }
         setValidated(true);
     }
 

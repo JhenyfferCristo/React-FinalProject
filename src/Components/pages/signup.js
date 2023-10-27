@@ -2,11 +2,11 @@ import { useState } from "react";
 import Button from "react-bootstrap/Button";
 import Col from "react-bootstrap/Col";
 import Form from "react-bootstrap/Form";
-import InputGroup from "react-bootstrap/InputGroup";
 import Row from "react-bootstrap/Row";
 import Container from "react-bootstrap/Container";
-import { Formik } from "formik";
+import {Formik} from "formik";
 import * as yup from "yup";
+
 
 const INITIAL_VALUES = {
   firstName: "",
@@ -20,6 +20,8 @@ const INITIAL_VALUES = {
   password: "",
 };
 export const Signup = () => {
+  const [users, setUsers] = useState([]);
+
   const signUpSchema = yup.object().shape({
     firstName: yup.string().required(),
     lastName: yup.string().required(),
@@ -42,7 +44,11 @@ export const Signup = () => {
           <Formik
             validationSchema={signUpSchema}
             initialValues={INITIAL_VALUES}
-            onSubmit={(values) => console.log(values)}
+            onSubmit={(values, {resetForm}) =>{
+            setUsers((prevUsers) =>[...prevUsers,values]);
+            console.log(users);
+            resetForm();
+          }}
           >
             {({ values, handleChange, errors, touched, handleSubmit }) => {
               function isInvalid(field) {
