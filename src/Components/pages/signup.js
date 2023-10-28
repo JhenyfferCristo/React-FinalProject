@@ -34,6 +34,7 @@ export const Signup = () => {
     password: yup.string().required(),
   });
 
+  console.log(users);
   return (
     <Container className="pt-5">
       <Row>
@@ -46,7 +47,6 @@ export const Signup = () => {
             initialValues={INITIAL_VALUES}
             onSubmit={(values, {resetForm}) =>{
             setUsers((prevUsers) =>[...prevUsers,values]);
-            console.log(users);
             resetForm();
           }}
           >
