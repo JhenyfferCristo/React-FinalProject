@@ -1,8 +1,7 @@
-export const Admnistration=()=>{
-    return(
-       <>
-       
-        <h1>This is ADM page</h1>
-        </> 
-    )
-    }
+export const Admnistration = () => {
+  return (
+    <>
+      <h1>This is ADM page</h1>
+    </>
+  );
+};

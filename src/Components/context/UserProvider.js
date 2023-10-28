@@ -1,46 +1,44 @@
-import { useEffect, useState, createContext, useContext } from "react";
-
+import { useEffect, useState, createContext, useContext } from 'react';
 
 const UserContext = createContext();
 
-export function UserProvider({children}){
-    const [user, setUser] = useState(() => getLocalStorage())
-    useEffect(() => {
-        setLocalStorage(user);
-    }, [user])
+export function UserProvider({ children }) {
+  const [user, setUser] = useState(() => getLocalStorage());
+  useEffect(() => {
+    setLocalStorage(user);
+  }, [user]);
 
-    function isUserLoggedIn(){
-        return Boolean(user.username)
-    }
+  function isUserLoggedIn() {
+    return Boolean(user.username);
+  }
 
-    function logoutUser(){
-        setUser({})
-    }
+  function logoutUser() {
+    setUser({});
+  }
 
-    return (
-        <UserContext.Provider 
-            value={{
-                user: user,
-                setUser: setUser,
-                isUserLoggedIn: isUserLoggedIn,
-                logoutUser: logoutUser
-            }}
-        >
-            {children}
-        </UserContext.Provider>
-    )
+  return (
+    <UserContext.Provider
+      value={{
+        user: user,
+        setUser: setUser,
+        isUserLoggedIn: isUserLoggedIn,
+        logoutUser: logoutUser,
+      }}>
+      {children}
+    </UserContext.Provider>
+  );
 }
 
-export function useUserContext(){
-    const userContext = useContext(UserContext);
-    return userContext;
+export function useUserContext() {
+  const userContext = useContext(UserContext);
+  return userContext;
 }
 
 function setLocalStorage(value) {
-    window.localStorage.setItem('user', JSON.stringify(value));
+  window.localStorage.setItem('user', JSON.stringify(value));
 }
-  
+
 function getLocalStorage() {
-    const value = window.localStorage.getItem('user');
-    return value ? JSON.parse(value) : {};
+  const value = window.localStorage.getItem('user');
+  return value ? JSON.parse(value) : {};
 }

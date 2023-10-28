@@ -8,8 +8,8 @@ export function NavBar() {
   return (
     <Navbar expand="lg" className="bg-body-tertiary">
       <Container>
-        <Navbar.Brand href="#home">
-          <img
+        <Navbar.Brand href="/">
+          <img 
             src="/res/logo.png"
             width="130"
             height="50"

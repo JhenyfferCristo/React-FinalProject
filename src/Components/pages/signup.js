@@ -1,23 +1,22 @@
-import { useState } from "react";
-import Button from "react-bootstrap/Button";
-import Col from "react-bootstrap/Col";
-import Form from "react-bootstrap/Form";
-import Row from "react-bootstrap/Row";
-import Container from "react-bootstrap/Container";
-import {Formik} from "formik";
-import * as yup from "yup";
-
+import { useState } from 'react';
+import Button from 'react-bootstrap/Button';
+import Col from 'react-bootstrap/Col';
+import Form from 'react-bootstrap/Form';
+import Row from 'react-bootstrap/Row';
+import Container from 'react-bootstrap/Container';
+import { Formik } from 'formik';
+import * as yup from 'yup';
 
 const INITIAL_VALUES = {
-  firstName: "",
-  lastName: "",
-  email: "",
-  phone: "",
-  dob: "",
-  department: "",
-  program: "",
-  userName: "",
-  password: "",
+  firstName: '',
+  lastName: '',
+  email: '',
+  phone: '',
+  dob: '',
+  department: '',
+  program: '',
+  userName: '',
+  password: '',
 };
 export const Signup = () => {
   const [users, setUsers] = useState([]);
@@ -25,7 +24,7 @@ export const Signup = () => {
   const signUpSchema = yup.object().shape({
     firstName: yup.string().required(),
     lastName: yup.string().required(),
-    email: yup.string().email().required("Invalid email"),
+    email: yup.string().email().required('Invalid email'),
     phone: yup.string().required(),
     dob: yup.date().required(),
     department: yup.string().required(),
@@ -45,11 +44,10 @@ export const Signup = () => {
           <Formik
             validationSchema={signUpSchema}
             initialValues={INITIAL_VALUES}
-            onSubmit={(values, {resetForm}) =>{
-            setUsers((prevUsers) =>[...prevUsers,values]);
-            resetForm();
-          }}
-          >
+            onSubmit={(values, { resetForm }) => {
+              setUsers((prevUsers) => [...prevUsers, values]);
+              resetForm();
+            }}>
             {({ values, handleChange, errors, touched, handleSubmit }) => {
               function isInvalid(field) {
                 return Boolean(errors[field]) && Boolean(touched[field]);
@@ -67,7 +65,7 @@ export const Signup = () => {
                         name="firstName"
                         value={values.firstName}
                         onChange={handleChange}
-                        isInvalid={isInvalid("firstName")}
+                        isInvalid={isInvalid('firstName')}
                       />
                     </Form.Group>
                     <Form.Group as={Col} md="6">
@@ -79,7 +77,7 @@ export const Signup = () => {
                         name="lastName"
                         value={values.lastName}
                         onChange={handleChange}
-                        isInvalid={isInvalid("lastName")}
+                        isInvalid={isInvalid('lastName')}
                       />
                     </Form.Group>
                   </Row>
@@ -93,7 +91,7 @@ export const Signup = () => {
                         name="email"
                         value={values.email}
                         onChange={handleChange}
-                        isInvalid={isInvalid("email")}
+                        isInvalid={isInvalid('email')}
                       />
                       <Form.Control.Feedback type="invalid">
                         {errors.email}
@@ -109,7 +107,7 @@ export const Signup = () => {
                         name="phone"
                         value={values.phone}
                         onChange={handleChange}
-                        isInvalid={isInvalid("phone")}
+                        isInvalid={isInvalid('phone')}
                       />
                     </Form.Group>
                     <Form.Group as={Col} md="6">
@@ -120,7 +118,7 @@ export const Signup = () => {
                         name="dob"
                         value={values.dob}
                         onChange={handleChange}
-                        isInvalid={isInvalid("dob")}
+                        isInvalid={isInvalid('dob')}
                       />
                     </Form.Group>
                   </Row>
@@ -134,7 +132,7 @@ export const Signup = () => {
                         name="department"
                         value={values.department}
                         onChange={handleChange}
-                        isInvalid={isInvalid("department")}
+                        isInvalid={isInvalid('department')}
                       />
                     </Form.Group>
                   </Row>
@@ -145,8 +143,7 @@ export const Signup = () => {
                         name="program"
                         value={values.program}
                         onChange={handleChange}
-                        isInvalid={isInvalid("program")}
-                      >
+                        isInvalid={isInvalid('program')}>
                         <option value="1">Diploma</option>
                         <option value="2">Pos Diploma</option>
                         <option value="3">Certificate</option>
@@ -162,7 +159,7 @@ export const Signup = () => {
                         name="userName"
                         value={values.userName}
                         onChange={handleChange}
-                        isInvalid={isInvalid("userName")}
+                        isInvalid={isInvalid('userName')}
                       />
                     </Form.Group>
                     <Form.Group as={Col} md="6">
@@ -173,7 +170,7 @@ export const Signup = () => {
                         name="password"
                         value={values.password}
                         onChange={handleChange}
-                        isInvalid={isInvalid("password")}
+                        isInvalid={isInvalid('password')}
                       />
                     </Form.Group>
                   </Row>

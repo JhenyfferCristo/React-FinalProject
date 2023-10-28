@@ -1,9 +1,7 @@
-export const Student=()=>{
-    return(
-       <>
-       
-        <h1>This is student page</h1>
-        </> 
-    )
-    
-    }
+export const Student = () => {
+  return (
+    <>
+      <h1>This is student page</h1>
+    </>
+  );
+};
