@@ -9,6 +9,7 @@ import { NavBar } from './NavBar';
 import { Admnistration } from './pages/admPage';
 import { Student } from './pages/studentPage';
 import { UserProvider, useUserContext } from './context/UserProvider';
+import AddCourse from './pages/addCourse';
 
 function AdmRoutes() {
   const { user, isUserLoggedIn } = useUserContext();
@@ -33,7 +34,7 @@ function LogedOutUserOnly({ children }) {
   }
   return <Navigate to="/" />;
 }
-import AddCourse from './pages/addCourse';
+
 
 function App() {
   return (
