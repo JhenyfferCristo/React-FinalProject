@@ -1,9 +1,12 @@
 import { useEffect, useState, createContext, useContext } from 'react';
+import { useNavigate } from 'react-router-dom';
 
 const UserContext = createContext();
 
 export function UserProvider({ children }) {
   const [user, setUser] = useState(() => getLocalStorage());
+  const navigate = useNavigate();
+
   useEffect(() => {
     setLocalStorage(user);
   }, [user]);
@@ -14,6 +17,7 @@ export function UserProvider({ children }) {
 
   function logoutUser() {
     setUser({});
+    navigate('/');
   }
 
   return (

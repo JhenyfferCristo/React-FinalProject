@@ -94,9 +94,9 @@ export const Home = () => {
             size="md"
             onChange={(event) => setSelectedTerm(event.target.value)}>
             <option>Term</option>
-            <option> 1</option>
-            <option> 2</option>
-            <option> 3</option>
+            <option>1</option>
+            <option>2</option>
+            <option>3</option>
             <option>4</option>
             <option>5</option>
           </Form.Select>
