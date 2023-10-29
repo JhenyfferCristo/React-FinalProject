@@ -1,14 +1,9 @@
-import {
-  InputGroup,
-  Form,
-  Container,
-  Row,
-  Col,
-  Dropdown,
-} from 'react-bootstrap';
+import React, { useState } from 'react';
+import { InputGroup, Form, Container, Row, Col } from 'react-bootstrap';
 import { CourseCard } from '../CourseCard';
 
 export const Home = () => {
+  const [searchBar, setSearchBar] = useState('');
   const courses = [
     {
       name: 'Project management 1',
@@ -50,12 +45,23 @@ export const Home = () => {
     },
   ];
 
+  const filteredCourses = courses.filter(
+    (course) =>
+      course.name.toLowerCase().includes(searchBar.toLowerCase()) ||
+      course.code.toLowerCase().includes(searchBar.toLowerCase()),
+  );
+
   return (
     <Container>
       <Row>
         <Col>
           <InputGroup size="md" className="mb-3">
-            <Form.Control placeholder="Search" style={{ tabSize: '100px' }} />
+            <Form.Control
+              placeholder="Search"
+              style={{ tabSize: '100px' }}
+              value={searchBar}
+              onChange={(event) => setSearchBar(event.target.value)}
+            />
             <InputGroup.Text i className="bi bi-search"></InputGroup.Text>
           </InputGroup>
         </Col>
@@ -88,7 +94,7 @@ export const Home = () => {
         </Col>
       </Row>
       <Row xs={1} md={2} lg={3}>
-        {courses.map((course, index) => (
+        {filteredCourses.map((course, index) => (
           <CourseCard key={index} course={course} />
         ))}
       </Row>
