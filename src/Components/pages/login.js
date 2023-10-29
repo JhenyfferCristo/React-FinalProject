@@ -32,9 +32,12 @@ export const Login = () => {
     if (form.checkValidity() === true) {
       //call BE api to login
       //if(success)
+      const role = username === 'admin' ? 'admin' : 'student';
       setUser({
         username,
+        role,
       });
+      navigate(role === 'admin' ? '/admPage' : '/studentPage');
     }
     setValidated(true);
   };

@@ -20,7 +20,7 @@ export function NavBar() {
         <Navbar.Toggle aria-controls="basic-navbar-nav" />
         <Navbar.Collapse id="basic-navbar-nav">
           <Nav className="me-auto">
-            <Nav.Link href="/signup">Apply Now</Nav.Link>
+            {!isUserLoggedIn() && <Nav.Link href="/signup">Apply Now</Nav.Link>}
             {isUserLoggedIn() ? <Nav.Link onClick={logoutUser}>Logout</Nav.Link> : <Nav.Link href="/login">Login</Nav.Link>}
             <Nav.Link href="/admPage">Admnistration</Nav.Link>
           </Nav>

@@ -1,16 +1,14 @@
-import {
-  InputGroup,
-  Form,
-  Container,
-  Row,
-  Col,
-  Dropdown,
-} from 'react-bootstrap';
+import React, { useState } from 'react';
+import { InputGroup, Form, Container, Row, Col } from 'react-bootstrap';
 import { CourseCard } from '../CourseCard';
 
 import Button from 'react-bootstrap/Button';
 
 export const Home = () => {
+  const [searchBar, setSearchBar] = useState('');
+  const [selectedProgram, setSelectedProgram] = useState('Program');
+  const [selectedTerm, setSelectedTerm] = useState('Term');
+
   const courses = [
     {
       name: 'Project management 1',
@@ -52,12 +50,29 @@ export const Home = () => {
     },
   ];
 
+  const filteredCourses = courses.filter((course) => {
+    const programFilter =
+      selectedProgram === 'Program' || course.program === selectedProgram;
+    const termFilter = selectedTerm === 'Term' || course.term === selectedTerm;
+    return (
+      (course.name.toLowerCase().includes(searchBar.toLowerCase()) ||
+        course.code.toLowerCase().includes(searchBar.toLowerCase())) &&
+      programFilter &&
+      termFilter
+    );
+  });
+
  return (
     <Container>
       <Row>
         <Col>
           <InputGroup size="md" className="mb-3">
-            <Form.Control placeholder="Search" style={{ tabSize: '100px' }} />
+            <Form.Control
+              placeholder="Search"
+              style={{ tabSize: '100px' }}
+              value={searchBar}
+              onChange={(event) => setSearchBar(event.target.value)}
+            />
             <InputGroup.Text i className="bi bi-search"></InputGroup.Text>
           </InputGroup>
         </Col>
@@ -69,7 +84,7 @@ export const Home = () => {
         <Col>
           <Form.Select
             size="md"
-            onChange={(event) => console.log(event.target.value)}>
+            onChange={(event) => setSelectedProgram(event.target.value)}>
             <option>Program</option>
             <option>Diploma</option>
             <option>Pos Diploma</option>
@@ -79,13 +94,13 @@ export const Home = () => {
         <Col>
           <Form.Select
             size="md"
-            onChange={(event) => console.log(event.target.value)}>
+            onChange={(event) => setSelectedTerm(event.target.value)}>
             <option>Term</option>
-            <option>Term 1</option>
-            <option>Term 2</option>
-            <option>Term 3</option>
-            <option>Term 4</option>
-            <option>Term 5</option>
+            <option>1</option>
+            <option>2</option>
+            <option>3</option>
+            <option>4</option>
+            <option>5</option>
           </Form.Select>
         </Col>
         <Col>
@@ -112,7 +127,7 @@ export const Home = () => {
         </Col>
       </Row>
       <Row xs={1} md={2} lg={3}>
-        {courses.map((course, index) => (
+        {filteredCourses.map((course, index) => (
           <CourseCard key={index} course={course} />
         ))}
       </Row>
