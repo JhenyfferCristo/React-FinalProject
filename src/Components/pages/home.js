@@ -8,6 +8,8 @@ import {
 } from 'react-bootstrap';
 import { CourseCard } from '../CourseCard';
 
+import Button from 'react-bootstrap/Button';
+
 export const Home = () => {
   const courses = [
     {
@@ -50,7 +52,7 @@ export const Home = () => {
     },
   ];
 
-  return (
+ return (
     <Container>
       <Row>
         <Col>
@@ -86,12 +88,34 @@ export const Home = () => {
             <option>Term 5</option>
           </Form.Select>
         </Col>
+        <Col>
+          <Form.Select
+            size="md"
+            onChange={(event) => console.log(event.target.value)}>
+            <option>Course</option>
+            <option>Project management 1</option>
+            <option>Advanced Project management 1</option>
+            <option>Networking</option>
+            <option>C++ Programming Fundamentals</option>
+          </Form.Select>
+        </Col>
+        <Col>
+          <Form.Select
+            size="md"
+            onChange={(event) => console.log(event.target.value)}>
+            <option>Course Code</option>
+            <option>Pr111</option>
+            <option>Pr333</option>
+            <option>Net222</option>
+            <option>C++111</option>
+          </Form.Select>
+        </Col>
       </Row>
       <Row xs={1} md={2} lg={3}>
         {courses.map((course, index) => (
           <CourseCard key={index} course={course} />
         ))}
       </Row>
-    </Container>
+     </Container>
   );
 };

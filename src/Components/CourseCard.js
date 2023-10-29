@@ -1,6 +1,9 @@
-import { Col, Card } from 'react-bootstrap';
+import { Col, Card, Row } from 'react-bootstrap';
+import Button from 'react-bootstrap/Button';
+import React, {useS} from 'react';
+import { Link } from 'react-router-dom';
 
-export function CourseCard({ course }) {
+export function CourseCard({ course, isAdminPage }) {
   const {
     name,
     code,
@@ -12,6 +15,15 @@ export function CourseCard({ course }) {
     fees,
     description,
   } = course;
+
+
+    const handleDelete = () => {
+      const confirmed = window.confirm("Confirm course deletion?");
+      if(confirmed) {
+  
+      }
+    };
+      
   return (
     <Col>
       <Card>
@@ -25,6 +37,24 @@ export function CourseCard({ course }) {
           <Card.Text>{term}</Card.Text>
           <Card.Text>{fees}</Card.Text>
           <Card.Text>{description}</Card.Text>
+          <Row>
+          <Col>
+          {isAdminPage && (
+          <Button variant="danger" onClick={handleDelete}>
+                      Delete Course
+                    </Button>
+          )}
+          </Col>
+          <Col>
+          {isAdminPage && (
+            <Link to="/studentPage">
+          <Button variant="primary" type="submit">
+                      Students
+                    </Button>
+                    </Link>
+          )}
+            </Col>
+          </Row>
         </Card.Body>
       </Card>
     </Col>
