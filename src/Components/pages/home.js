@@ -4,6 +4,9 @@ import { CourseCard } from '../CourseCard';
 
 export const Home = () => {
   const [searchBar, setSearchBar] = useState('');
+  const [selectedProgram, setSelectedProgram] = useState('Program');
+  const [selectedTerm, setSelectedTerm] = useState('Term');
+
   const courses = [
     {
       name: 'Project management 1',
@@ -45,11 +48,17 @@ export const Home = () => {
     },
   ];
 
-  const filteredCourses = courses.filter(
-    (course) =>
-      course.name.toLowerCase().includes(searchBar.toLowerCase()) ||
-      course.code.toLowerCase().includes(searchBar.toLowerCase()),
-  );
+  const filteredCourses = courses.filter((course) => {
+    const programFilter =
+      selectedProgram === 'Program' || course.program === selectedProgram;
+    const termFilter = selectedTerm === 'Term' || course.term === selectedTerm;
+    return (
+      (course.name.toLowerCase().includes(searchBar.toLowerCase()) ||
+        course.code.toLowerCase().includes(searchBar.toLowerCase())) &&
+      programFilter &&
+      termFilter
+    );
+  });
 
   return (
     <Container>
@@ -73,7 +82,7 @@ export const Home = () => {
         <Col>
           <Form.Select
             size="md"
-            onChange={(event) => console.log(event.target.value)}>
+            onChange={(event) => setSelectedProgram(event.target.value)}>
             <option>Program</option>
             <option>Diploma</option>
             <option>Pos Diploma</option>
@@ -83,13 +92,13 @@ export const Home = () => {
         <Col>
           <Form.Select
             size="md"
-            onChange={(event) => console.log(event.target.value)}>
+            onChange={(event) => setSelectedTerm(event.target.value)}>
             <option>Term</option>
-            <option>Term 1</option>
-            <option>Term 2</option>
-            <option>Term 3</option>
-            <option>Term 4</option>
-            <option>Term 5</option>
+            <option> 1</option>
+            <option> 2</option>
+            <option> 3</option>
+            <option>4</option>
+            <option>5</option>
           </Form.Select>
         </Col>
       </Row>
