@@ -35,18 +35,36 @@ function LogedOutUserOnly({ children }) {
   return <Navigate to="/" />;
 }
 
-
 function App() {
   return (
     <UserProvider>
       <NavBar />
       <Routes>
         <Route index element={<Home />} />
-        <Route path="login" element={<Login />} />
-        <Route path="signup" element={<Signup />} />
-        <Route path="admPage" element={<Admnistration />} />
-        <Route path="StudentPage" element={<Student />} />
-        <Route path="AddCourse" element={<AddCourse />} />
+        <Route
+          path="/login"
+          element={
+            <LogedOutUserOnly>
+              <Login />
+            </LogedOutUserOnly>
+          }
+        />
+        <Route
+          path="/signup"
+          element={
+            <LogedOutUserOnly>
+              <Signup />
+            </LogedOutUserOnly>
+          }
+        />
+        <Route exact path="/admPage" element={<AdmRoutes />}>
+          <Route exact path="/admPage" element={<Admnistration />} />
+          <Route exact path="/admPage/addCourse" element={<AddCourse />} />
+        </Route>
+        <Route exact path="/studentPage" element={<StudentRoutes />}>
+          <Route exact path="/studentPage" element={<Student />} />
+        </Route>
+        <Route path="*" element={<Home />} />
       </Routes>
     </UserProvider>
   );

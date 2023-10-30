@@ -10,8 +10,6 @@ import { CourseCard } from '../CourseCard';
 import Button from 'react-bootstrap/Button';
 import { Link } from 'react-router-dom';
 
-
-
 export const Admnistration = () => {
   const courses = [
     {
@@ -54,7 +52,6 @@ export const Admnistration = () => {
     },
   ];
 
-  
   return (
     <Container>
       <Row>
@@ -67,18 +64,18 @@ export const Admnistration = () => {
       </Row>
       <Row>
         <Col>
-        <Link to="/addCourse"> 
-        <Button variant="primary" type="submit">
-                      Add Course
-                    </Button>
-                    </Link>
+          <Link to="/admPage/addCourse">
+            <Button variant="primary" type="submit">
+              Add Course
+            </Button>
+          </Link>
         </Col>
         <Col>
-        <Button variant="primary" type="submit">
-                      Contact Form
-                    </Button>
+          <Button variant="primary" type="submit">
+            Contact Form
+          </Button>
         </Col>
-        </Row>
+      </Row>
       <Row>
         <h1>Program and Courses - Software Development</h1>
       </Row>
@@ -130,7 +127,7 @@ export const Admnistration = () => {
       </Row>
       <Row xs={1} md={2} lg={3}>
         {courses.map((course, index) => (
-          <CourseCard key={index} course={course} isAdminPage={true}/>
+          <CourseCard key={index} course={course} isAdminPage={true} />
         ))}
       </Row>
     </Container>
