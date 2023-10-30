@@ -39,6 +39,7 @@ export const Signup = () => {
       <Row>
         <h3 className="text-center mb-5">Welcome to Bow Valley College</h3>
       </Row>
+      
       <Row className="justify-content-center">
         <Col xs="10" lg="6">
           <Formik

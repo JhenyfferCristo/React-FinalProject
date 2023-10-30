@@ -1,6 +1,7 @@
 import React, {useState} from 'react';
 import { Row } from 'react-bootstrap';
-import { Container, Form, Button } from 'react-bootstrap';
+import { Container, Form, Button, Col } from 'react-bootstrap';
+
 
 const AddCourse = () => {
     const [courseData, setCourseData] = useState({
@@ -27,10 +28,13 @@ const AddCourse = () => {
 
 
   return (
-    <Container>
+    <Container className="pt-5">
         <Row>
-      <h1>Adding a New Course Form</h1>
-      </Row>
+        <h3 className="text-center mb-5">Adding a New Course Form</h3>
+        </Row>
+      
+    <Row className="justify-content-center">
+     
       <Form onSubmit={handleSubmit}>
         <Form.Group className="mb-3">
           <Form.Label>Course Name</Form.Label>
@@ -42,30 +46,31 @@ const AddCourse = () => {
             required
           />
         </Form.Group>
-
-        <Form.Group className="mb-3">
-          <Form.Label>Start Date</Form.Label>
-          <Form.Control
-            type="date"
-            name="startDate"
-            value={courseData.startDate}
-            onChange={handleChange}
-            required
-          />
-        </Form.Group>
-
-        <Form.Group className="mb-3">
-          <Form.Label>End Date</Form.Label>
-          <Form.Control
-            type="date"
-            name="endDate"
-            value={courseData.endDate}
-            onChange={handleChange}
-            required
-          />
-        </Form.Group>
-
-        <Form.Group className="mb-3">
+        <Row className="mb-3">
+                    <Form.Group as={Col} md="6">
+                      <Form.Label>Start Date</Form.Label>
+                      <Form.Control
+                        type="date"
+                        name="startDate"
+                        value={courseData.startDate}
+                        onChange={handleChange}
+                        required
+                      />
+                    </Form.Group>
+                    <Form.Group as={Col} md="6">
+                      <Form.Label>End Date</Form.Label>
+                      <Form.Control
+                        type="date"
+                        name="endDate"
+                        value={courseData.endDate}
+                        onChange={handleChange}
+                        required
+                      />
+                    </Form.Group>
+                  </Row>
+    
+        <Row className="mb-3">
+         <Form.Group as={Col} md="6">
           <Form.Label>Course Code</Form.Label>
           <Form.Control
             type="text"
@@ -75,8 +80,7 @@ const AddCourse = () => {
             required
           />
         </Form.Group>
-
-        <Form.Group className="mb-3">
+        <Form.Group as={Col} md="6">
           <Form.Label>Department</Form.Label>
           <Form.Control
             type="text"
@@ -86,6 +90,7 @@ const AddCourse = () => {
             required
           />
         </Form.Group>
+        </Row>
 
         <Form.Group className="mb-3">
           <Form.Label>Description</Form.Label>
@@ -98,7 +103,8 @@ const AddCourse = () => {
           />
         </Form.Group>
 
-        <Form.Group className="mb-3">
+        <Row className="mb-3">
+         <Form.Group as={Col} md="6">
           <Form.Label>Term</Form.Label>
           <Form.Control
             as="textarea"
@@ -108,8 +114,7 @@ const AddCourse = () => {
             required
           />
         </Form.Group>
-
-        <Form.Group className="mb-3">
+        <Form.Group as={Col} md="6">
           <Form.Label>Program</Form.Label>
           <Form.Control
             as="textarea"
@@ -119,23 +124,26 @@ const AddCourse = () => {
             required
           />
         </Form.Group>
+        </Row>
 
         <Form.Group className="mb-3">
-          <Form.Label>Fees</Form.Label>
+          <Form.Label>Fees ($CAD)</Form.Label>
           <Form.Control
-            as="text"
+            as="textarea"
             name="fees"
             value={courseData.fees}
             onChange={handleChange}
             required
           />
         </Form.Group>
+        
 
         <Button variant="primary" type="submit">
           Add Course
         </Button>
-      </Form>
-    </Container>
+       </Form>
+    </Row>
+  </Container>
     
   );
 };

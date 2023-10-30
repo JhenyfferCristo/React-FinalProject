@@ -15,12 +15,10 @@ export function CourseCard({ course, isAdminPage }) {
     fees,
     description,
   } = course;
-
-
+  
     const handleDelete = () => {
       const confirmed = window.confirm("Confirm course deletion?");
       if(confirmed) {
-  
       }
     };
       

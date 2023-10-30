@@ -46,6 +46,7 @@ function App() {
         <Route path="signup" element={<Signup />} />
         <Route path="admPage" element={<Admnistration />} />
         <Route path="StudentPage" element={<Student />} />
+        <Route path="AddCourse" element={<AddCourse />} />
       </Routes>
     </UserProvider>
   );
