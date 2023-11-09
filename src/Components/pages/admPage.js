@@ -71,9 +71,11 @@ export const Admnistration = () => {
           </Link>
         </Col>
         <Col>
-          <Button variant="primary" type="submit">
-            Contact Form
-          </Button>
+          <Link to="/admPage/admViewForm">
+            <Button variant="primary" type="submit">
+              Contact Form
+            </Button>
+          </Link>
         </Col>
       </Row>
       <Row>

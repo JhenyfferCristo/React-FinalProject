@@ -8,8 +8,10 @@ import { Home } from './pages/home';
 import { NavBar } from './NavBar';
 import { Admnistration } from './pages/admPage';
 import { Student } from './pages/studentPage';
+import { StudentForm } from './pages/studentForm';
 import { UserProvider, useUserContext } from './context/UserProvider';
 import AddCourse from './pages/addCourse';
+import AdminForm from './pages/admViewForm';
 
 function AdmRoutes() {
   const { user, isUserLoggedIn } = useUserContext();
@@ -59,10 +61,12 @@ function App() {
         />
         <Route exact path="/admPage" element={<AdmRoutes />}>
           <Route exact path="/admPage" element={<Admnistration />} />
+          <Route exact path="/admPage/admViewForm" element={<AdminForm/>} />
           <Route exact path="/admPage/addCourse" element={<AddCourse />} />
         </Route>
         <Route exact path="/studentPage" element={<StudentRoutes />}>
           <Route exact path="/studentPage" element={<Student />} />
+          <Route exact path="/studentPage/studentForm" element={<StudentForm />} />
         </Route>
         <Route path="*" element={<Home />} />
       </Routes>
