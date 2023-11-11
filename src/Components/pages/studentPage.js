@@ -74,16 +74,16 @@ export const Student = () => {
 </Row>
 <Row>
 <Col>
-<Link to="/studentPage/registerCourse">
 <Button variant="primary" type="submit">
               Register for Course
 </Button>
-</Link>
 </Col>
 <Col>
+<Link to="/studentPage/studentForm">
 <Button variant="primary" type="submit">
             Contact Form
 </Button>
+</Link>
 </Col>
 </Row>
 <Row>
