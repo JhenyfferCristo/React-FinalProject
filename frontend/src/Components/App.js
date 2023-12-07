@@ -59,14 +59,19 @@ function App() {
             </LogedOutUserOnly>
           }
         />
+        {/* outlet route include all the children routes of admpage for ex. */}
         <Route exact path="/admPage" element={<AdmRoutes />}>
           <Route exact path="/admPage" element={<Admnistration />} />
-          <Route exact path="/admPage/admViewForm" element={<AdminForm/>} />
+          <Route exact path="/admPage/admViewForm" element={<AdminForm />} />
           <Route exact path="/admPage/addCourse" element={<AddCourse />} />
         </Route>
         <Route exact path="/studentPage" element={<StudentRoutes />}>
           <Route exact path="/studentPage" element={<Student />} />
-          <Route exact path="/studentPage/studentForm" element={<StudentForm />} />
+          <Route
+            exact
+            path="/studentPage/studentForm"
+            element={<StudentForm />}
+          />
         </Route>
         <Route path="*" element={<Home />} />
       </Routes>

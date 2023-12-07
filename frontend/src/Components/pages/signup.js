@@ -6,6 +6,7 @@ import Row from 'react-bootstrap/Row';
 import Container from 'react-bootstrap/Container';
 import { Formik } from 'formik';
 import * as yup from 'yup';
+import { useNavigate } from 'react-router-dom';
 
 const INITIAL_VALUES = {
   firstName: '',
@@ -20,6 +21,7 @@ const INITIAL_VALUES = {
 };
 export const Signup = () => {
   const [users, setUsers] = useState([]);
+  const navigate = useNavigate();
 
   const signUpSchema = yup.object().shape({
     firstName: yup.string().required(),
@@ -39,15 +41,40 @@ export const Signup = () => {
       <Row>
         <h3 className="text-center mb-5">Welcome to Bow Valley College</h3>
       </Row>
-      
+
       <Row className="justify-content-center">
         <Col xs="10" lg="6">
           <Formik
             validationSchema={signUpSchema}
             initialValues={INITIAL_VALUES}
-            onSubmit={(values, { resetForm }) => {
-              setUsers((prevUsers) => [...prevUsers, values]);
-              resetForm();
+            onSubmit={async (values, { resetForm }) => {
+              console.log(values);
+              try {
+                const response = await fetch('http://localhost:5000/signup', {
+                  method: 'POST',
+                  body: JSON.stringify({
+                    firstName: values.firstName,
+                    lastName: values.lastName,
+                    email: values.email,
+                    phone: values.phone,
+                    dob: values.dob,
+                    department: values.department,
+                    program: values.program,
+                    userName: values.userName,
+                    password: values.password,
+                  }),
+                  headers: {
+                    'Content-Type': 'application/json',
+                  },
+                });
+                if (response.status !== 200) {
+                  throw new Error(response.statusText);
+                } else {
+                  navigate('/login');
+                }
+              } catch (error) {
+                console.error('Error during signup:', error);
+              }
             }}>
             {({ values, handleChange, errors, touched, handleSubmit }) => {
               function isInvalid(field) {

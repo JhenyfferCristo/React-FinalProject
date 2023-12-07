@@ -12,7 +12,7 @@ export function UserProvider({ children }) {
   }, [user]);
 
   function isUserLoggedIn() {
-    return Boolean(user.username);
+    return Boolean(user.id);
   }
 
   function logoutUser() {

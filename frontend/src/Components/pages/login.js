@@ -25,21 +25,39 @@ export const Login = () => {
     setPassword(event.target.value);
   };
 
-  const handleSubmit = (event) => {
+  const handleSubmit = async (event) => {
     event.preventDefault();
     event.stopPropagation();
     const form = event.currentTarget;
     if (form.checkValidity() === true) {
-      //call BE api to login
-      //if(success)
-      const role = username === 'admin' ? 'admin' : 'student';
-      setUser({
-        username,
-        role,
-      });
-      navigate(role === 'admin' ? '/admPage' : '/studentPage');
+      try {
+        setValidated(true);
+        const response = await fetch('http://localhost:5000/login', {
+          method: 'POST',
+          body: JSON.stringify({
+            userName: username,
+            password: password,
+          }),
+          headers: {
+            'Content-Type': 'application/json',
+          },
+        });
+        if (response.status !== 200) {
+          throw new Error(response.statusText);
+        } else {
+          const loggedInUser = await response.json();
+          setUser(loggedInUser); //set user to a localstorage "context-userProvider" to guarantee the user can navigate to all pages
+          if (loggedInUser.role === 'admin') {
+           navigate('/admPage');
+          } else if (loggedInUser.role === 'student') {
+           navigate('/studentPage');
+          }
+        }
+      } catch (error) {
+        console.error('Error during login:', error);
+        setFailedLogin(true);
+      }
     }
-    setValidated(true);
   };
 
   return (

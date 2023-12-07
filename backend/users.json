@@ -1,0 +1,41 @@
+[
+  {
+    "id": "1c6ae500-35dd-4cc1-b301-9303a0a9c947",
+    "role": "student",
+    "firstName": "jhenyffer",
+    "lastName": "cristo",
+    "email": "jheny@email.ca",
+    "phone": "1234",
+    "dob": "2023/12/7",
+    "department": "software",
+    "program": "Software Development",
+    "userName": "jheny",
+    "password": "124"
+  },
+  {
+    "id": "1c6ae500-35dd-4cc1-b301-9303a0a9c947",
+    "role": "admin",
+    "firstName": "rafael",
+    "lastName": "oli",
+    "email": "rafa@email.ca",
+    "phone": "3456",
+    "dob": "2022/03/09",
+    "department": "software",
+    "program": "Software Development",
+    "userName": "admin",
+    "password": "123"
+  },
+  {
+    "id": "47be3c5c-1c06-46be-9fbd-a7cb62a070c3",
+    "role": "student",
+    "firstName": "Gabriele",
+    "lastName": "Dupont",
+    "email": "gabi@email.ca",
+    "phone": "36578",
+    "dob": "2018-02-07",
+    "department": "Software Development",
+    "program": "2",
+    "userName": "gabi",
+    "password": "1234"
+  }  
+]
