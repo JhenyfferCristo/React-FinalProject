@@ -8,15 +8,6 @@ import { v4 as uuidv4 } from "uuid"; //uuid library to generates user IDs
 const app = express();
 const port = 5000;
 
-const sqlConnection = {
-  server: "localhost",
-  user: "user",
-  password: "user",
-  database: "bowCourseRegistration",
-  options: {
-    trustServerCertificate: true,
-  },
-};
 
 app.use(json());
 app.use(cors());
