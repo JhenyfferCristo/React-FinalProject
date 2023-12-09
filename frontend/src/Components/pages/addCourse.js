@@ -3,83 +3,97 @@ import { Row } from 'react-bootstrap';
 import { Container, Form, Button, Col } from 'react-bootstrap';
 import { Formik } from 'formik';
 import * as yup from 'yup';
-
+import { useNavigate } from 'react-router-dom';
 
 const INITIAL_VALUES = {
-        courseName: '',
-        startDate: '',
-        endDate: '',
-        courseCode: '',
-        department: '',
-        description: '',
-        term:'',
-        program:'',
-        fees:'',
-      };
+  courseName: '',
+  startDate: '',
+  endDate: '',
+  courseCode: '',
+  department: '',
+  description: '',
+  term:'',
+  program:'',
+  fees:'',
+};
 
-      export const AddCourse = () => {
-        const [users, setUsers] = useState([]);
-      
-        const signUpSchema = yup.object().shape({
-          courseName: yup.string().required(),
-          startDate: yup.date().required(),
-          endDate: yup.date().required(),
-          courseCode: yup.string().required(),
-          department: yup.string().required(),
-          description: yup.string().required(),
-          term: yup.string().required(),
-          program: yup.string().required(),
-          fees: yup.string().required(),
-        });
-      
-        /*
-      const handleChange = (e) => {
-        const { name, value } = e.target;
-        setCourseData({ ...courseData, [name]: value });
-      };
-    
-      const handleSubmit = (e) => {
-        e.preventDefault();
-        // Handling the form submission
-      };
-      */
+export const AddCourse = () => {
+  const [courses, setCourses] = useState([]);
+  const navigate = useNavigate();
 
 
-      console.log(users);
+  const signUpSchema = yup.object().shape({
+    courseName: yup.string().required(),
+    startDate: yup.date().required(),
+    endDate: yup.date().required(),
+    courseCode: yup.string().required(),
+    department: yup.string().required(),
+    description: yup.string().required(),
+    term: yup.string().required(),
+    program: yup.string().required(),
+    fees: yup.string().required(),
+  });
+
+  console.log(courses);
   return (
     <Container className="pt-5">
       <Row>
         <h3 className="text-center mb-5">Adding a New Course Form</h3>
       </Row>
 
-    <Row className="justify-content-center">
+      <Row className="justify-content-center">
         <Col xs="10" lg="6">
           <Formik
             validationSchema={signUpSchema}
             initialValues={INITIAL_VALUES}
-            onSubmit={(values, { resetForm }) => {
-              setUsers((prevUsers) => [...prevUsers, values]);
-              resetForm();
+            onSubmit={async (values, { resetForm }) => {
+              console.log(values);
+              try {
+                const response = await fetch('http://localhost:5000/courses', {
+                  method: 'POST',
+                  body: JSON.stringify({
+                    courseName: values.courseName,
+                    startDate: values.startDate,
+                    endDate: values.endDate,
+                    courseCode: values.courseCode,
+                    department: values.department,
+                    description: values.userName,
+                    term: values.password,
+                    program: values.program,
+                    fees: values.fees,
+                  }),
+                  headers: {
+                    'Content-Type': 'application/json',
+                  },
+                });
+                if (response.status !== 200) {
+                  throw new Error(response.statusText);
+                } else {
+                  navigate('/login');
+                }
+              } catch (error) {
+                console.error('Form Error :', error);
+              }
             }}>
             {({ values, handleChange, errors, touched, handleSubmit }) => {
               function isInvalid(field) {
                 return Boolean(errors[field]) && Boolean(touched[field]);
               }
 
-     return(
+   return(
       <Form noValidate onSubmit={handleSubmit}>
                   <Row className="mb-3">
                     <Form.Group as={Col} md="6">
                       <Form.Label>Course name</Form.Label>
                       <Form.Control
-                        required
-                        type="text"
-                        placeholder="Course name"
-                        name="courseName"
-                        value={values.courseName}
-                        onChange={handleChange}
-                        isInvalid={isInvalid('courseName')}
-                      />
+                         required
+                         type="text"
+                         placeholder="Course name"
+                         name="courseName"
+                         value={values.courseName}
+                         onChange={handleChange}
+                        isInvalid={!!(errors.courseName && touched.courseName)}
+/>
                     </Form.Group>
                     </Row>
 
@@ -92,7 +106,7 @@ const INITIAL_VALUES = {
                         name="startDate"
                         value={values.dob}
                         onChange={handleChange}
-                        isInvalid={isInvalid('startDate')}
+                        isInvalid={!!(errors.courseName && touched.courseName)}
                       />
                     </Form.Group>
                     <Form.Group as={Col} md="6">
@@ -103,7 +117,7 @@ const INITIAL_VALUES = {
                         name="endDate"
                         value={values.dob}
                         onChange={handleChange}
-                        isInvalid={isInvalid('endDate')}
+                        isInvalid={!!(errors.courseName && touched.courseName)}
                       />
                     </Form.Group>
                   </Row>
@@ -118,7 +132,7 @@ const INITIAL_VALUES = {
                         name="courseCode"
                         value={values.courseCode}
                         onChange={handleChange}
-                        isInvalid={isInvalid('courseCode')}
+                        isInvalid={!!(errors.courseName && touched.courseName)}
                       />
                     </Form.Group>
 
@@ -131,7 +145,7 @@ const INITIAL_VALUES = {
                         name="department"
                         value={values.department}
                         onChange={handleChange}
-                        isInvalid={isInvalid('department')}
+                        isInvalid={!!(errors.courseName && touched.courseName)}
                       />
                     </Form.Group>
                   </Row>
@@ -144,7 +158,7 @@ const INITIAL_VALUES = {
             name="description"
             value={values.description}
             onChange={handleChange}
-            isInvalid={isInvalid('description')}
+            isInvalid={!!(errors.courseName && touched.courseName)}
           />
         </Form.Group>
 
@@ -157,7 +171,7 @@ const INITIAL_VALUES = {
             name="term"
             value={values.term}
             onChange={handleChange}
-            isInvalid={isInvalid('term')}
+            isInvalid={!!(errors.courseName && touched.courseName)}
           />
         </Form.Group>
         <Form.Group as={Col} md="6">
@@ -168,7 +182,7 @@ const INITIAL_VALUES = {
             name="program"
             value={values.program}
             onChange={handleChange}
-            isInvalid={isInvalid('program')}
+            isInvalid={!!(errors.courseName && touched.courseName)}
           />
         </Form.Group>
         </Row>
@@ -181,23 +195,22 @@ const INITIAL_VALUES = {
             name="fees"
             value={values.fees}
             onChange={handleChange}
-            isInvalid={isInvalid('fees')}
+            isInvalid={!!(errors.courseName && touched.courseName)}
           />
         </Form.Group>
         
         <Row className="mt-4">
-                    <Button variant="primary" type="submit">
-                      Add Course
-                    </Button>
+              <Button variant="primary" type="submit">
+                Add Course
+                </Button>
                   </Row>
-  </Form>
-        );
-      }}
-    </Formik>
-  </Col>
- </Row>
-</Container>
-    
+                </Form>
+              );
+            }}
+          </Formik>
+        </Col>
+      </Row>
+    </Container>
   );
 };
 

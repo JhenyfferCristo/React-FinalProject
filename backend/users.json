@@ -37,5 +37,18 @@
     "program": "2",
     "userName": "gabi",
     "password": "1234"
-  }  
+  },
+  {
+    "id": "7d314e07-7a9f-4ed9-b0cb-29d5afb6c9cd",
+    "role": "student",
+    "firstName": "Rafael",
+    "lastName": "Barros",
+    "email": "rafaelscardini@gmail.com",
+    "phone": "555 555 5555",
+    "dob": "2023-12-11",
+    "department": "IT",
+    "program": "3",
+    "userName": "Raf",
+    "password": "1234"
+  }
 ]

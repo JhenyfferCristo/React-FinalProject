@@ -9,6 +9,46 @@ import {
 import { CourseCard } from '../CourseCard';
 import Button from 'react-bootstrap/Button';
 import { Link } from 'react-router-dom';
+import React, { useState, useEffect } from 'react';
+
+
+const AdmPage = () => {
+  const [courses, setCourses] = useState([]);
+
+  useEffect(() => {
+    fetch('http://localhost:5000/api/courses')
+      .then(response => response.json())
+      .then(data => {
+        setCourses(data); // Assuming the response is an array of courses
+      })
+      .catch(error => console.error('Error:', error));
+  }, []);
+
+  const deleteCourse = (id) => {
+    fetch(`http://localhost:5000/api/courses/${id}`, {
+      method: 'DELETE',
+    })
+    .then(() => {
+      setCourses(courses.filter(course => course.id !== id));
+    })
+    .catch(error => console.error('Error:', error));
+  };
+
+
+  return (
+    <div>
+      <h1>Admin Page</h1>
+      <Row xs={1} md={2} lg={3}>
+      {courses.map((course, index) => (
+       <div key={course.id}>
+       <CourseCard course={course} isAdminPage={true} />
+       <Button variant="danger" onClick={() => deleteCourse(course.id)}>Delete</Button>
+     </div>
+       ))}
+      </Row>
+    </div>
+  );
+};
 
 export const Admnistration = () => {
   const courses = [
@@ -104,34 +144,14 @@ export const Admnistration = () => {
             <option>Term 5</option>
           </Form.Select>
         </Col>
-        <Col>
-          <Form.Select
-            size="md"
-            onChange={(event) => console.log(event.target.value)}>
-            <option>Course</option>
-            <option>Project management 1</option>
-            <option>Advanced Project management 1</option>
-            <option>Networking</option>
-            <option>C++ Programming Fundamentals</option>
-          </Form.Select>
-        </Col>
-        <Col>
-          <Form.Select
-            size="md"
-            onChange={(event) => console.log(event.target.value)}>
-            <option>Course Code</option>
-            <option>Pr111</option>
-            <option>Pr333</option>
-            <option>Net222</option>
-            <option>C++111</option>
-          </Form.Select>
-        </Col>
       </Row>
       <Row xs={1} md={2} lg={3}>
-        {courses.map((course, index) => (
-          <CourseCard key={index} course={course} isAdminPage={true} />
+      {courses.map(course => (
+          <CourseCard key={course.id} course={course} isAdminPage={true} />
         ))}
       </Row>
     </Container>
   );
 };
+
+export default AdmPage;
