@@ -98,8 +98,6 @@ app.post("/login", async (req, res) => {
 });
 
 
-
-
 //RAFAEL admin page
 
 //read and return course information from json file
@@ -140,7 +138,7 @@ app.post("/courses", (req, res) => {
   try {
     const courseData = getAllCourses();
     let userMatched = courseData.find((course) => req.body.courseCode === course.courseCode);
-    if (!courseMatched) {
+    if (!userMatched) {
       let newCourse = {
         id: uuidv4(),
         role: "admin",
@@ -170,22 +168,17 @@ app.post("/courses", (req, res) => {
 
 //Bishal student page
 
-// Fetch courses from the JSON file
 const getCourses = () => {
-  const coursesData = fs.readFileSync("courses.json", "utf-8");
-  return JSON.parse(coursesData).courses;
-};
-
-// Save updated user data to the JSON file
-const saveUserData = (userData) => {
   try {
-    fs.writeFileSync("users.json", JSON.stringify(userData, null, 2));
+    const coursesData = fs.readFileSync("courses.json", "utf-8");
+    return JSON.parse(coursesData).courses;
   } catch (error) {
     console.error(error);
+    return [];
   }
 };
 
-// Endpoint to fetch available courses
+
 app.get("/api/courses", (req, res) => {
   try {
     const courses = getCourses();
@@ -195,32 +188,26 @@ app.get("/api/courses", (req, res) => {
   }
 });
 
-// Endpoint to register for a course
 app.post("/api/register-course", (req, res) => {
   try {
-    const { courseId, userId } = req.body; // Assuming frontend sends courseId and userId for registration
+    const { courseId, userId } = req.body;
 
-    // Load users data from a JSON file (or database)
     const usersData = fs.existsSync("users.json")
       ? JSON.parse(fs.readFileSync("users.json", "utf-8"))
       : [];
 
-    // Find the user by userId
     const user = usersData.find((user) => user.id === userId);
 
     if (user) {
-      // Check if the course exists in the courses data
       const courses = getCourses();
       const courseExists = courses.find((course) => course.code === courseId);
 
       if (courseExists) {
-        // Add the courseId to the user's enrolledCourses (assuming it's an array in user object)
         if (!user.enrolledCourses) {
           user.enrolledCourses = [];
         }
         user.enrolledCourses.push(courseId);
 
-        // Save the updated user data
         saveUsers(usersData);
 
         res.json({ message: "Course registered successfully" });
