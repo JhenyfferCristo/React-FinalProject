@@ -50,5 +50,18 @@
     "program": "3",
     "userName": "Raf",
     "password": "1234"
+  },
+  {
+    "id": "055deeac-86b5-403e-a03f-e502b27d6444",
+    "role": "student",
+    "firstName": "bishal",
+    "lastName": "kunwar",
+    "email": "bishal@email.ca",
+    "phone": "46568",
+    "dob": "2023-10-11",
+    "department": "software development",
+    "program": "2",
+    "userName": "bishal",
+    "password": "1234"
   }
 ]
